@@ -1,0 +1,33 @@
+---
+- name: Subir imagen_1 a ACR desde Docker Hub
+  hosts: acr
+  gather_facts: false
+
+  tasks:
+
+  
+    - name: Iniciar sesión en ACR
+      containers.podman.podman_login:
+        registry_login_server: "{{ acr_registry }}"
+        registry_username: "{{ acr_username }}"
+        registry_password: "{{ acr_password }}"
+
+          
+    - name: Descargar imagen_1 desde Docker Hub
+      containers.podman.podman_image:
+        name: "{{ dockerhub_image_1 }}"
+          
+
+    - name: Etiquetar imagen descargada
+      containers.podman.podman_tag:
+        image: "{{ dockerhub_image_1_source }}"
+        target_names:
+          - cggonzalez_casopractico2
+
+
+    - name: Subir imagen a ACR
+      containers.podman.podman_image:
+        name: "{{ dockerhub_image_1 }}"
+        push: yes
+        push_args:
+          dest: "{{ acr_registry }}"

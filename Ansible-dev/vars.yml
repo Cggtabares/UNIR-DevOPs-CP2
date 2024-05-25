@@ -1,0 +1,9 @@
+---
+acr_registry: 
+acr_username: 
+acr_password: 
+#dockerhub_username: carlosggtabares
+#dockerhub_password: 
+dockerhub_image_1_source: docker.io/carlosggtabares/nginx-calc-app-image
+dockerhub_image_1: nginx-calc-app-image
+image_version: cggonzalez_casopractico2
